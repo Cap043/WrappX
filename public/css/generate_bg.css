@@ -1,0 +1,20 @@
+html {
+    height: 100vh;
+    background:radial-gradient(32.59% 32.59% at 50% 72.34%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.68) 100%),
+    url('../img/bgsvg.svg') center/cover no-repeat;
+    background-size: cover;
+  background-repeat: no-repeat;
+    overflow-y: scroll;
+
+  }
+  @media screen and (max-width: 1130px){
+    html {
+      height:fit-content;
+      background:radial-gradient(32.59% 32.59% at 50% 72.34%, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.68) 100%),
+      url('../img/bgsvg.svg') center/cover no-repeat;
+      background-size: cover;
+    background-repeat: no-repeat;
+      overflow-y: scroll;
+  
+    }
+  }

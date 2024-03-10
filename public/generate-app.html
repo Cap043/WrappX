@@ -1,0 +1,334 @@
+<!-- generate-app.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/generate-app.css">
+    <link rel="stylesheet" href="./css/generate_bg.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+        type="text/javascript"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Volkhov" />
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <title>App Generator - Step 2</title>
+</head>
+
+<body>
+    <!-- <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div> -->
+
+    <!-- Main flex container -->
+    <div class="flexContainer" id="flexContainer">
+        <!-- Left child flexbox with iframe container -->
+        <div class="leftChild" id="leftChild">
+            <!-- Navbar for link playback -->
+            <div class="childone" id="childOne">
+                <h1>Preview</h1>
+                <!-- Iframe container with default size (400x800) -->
+                <div class="iframeContainer" id="iframeContainer">
+                    <iframe class="previewIframe" id="previewIframe" src="" width="375" height="812"></iframe>
+                </div>
+                <!-- Preset size dropdown -->
+                <label for="input" style="color:#26F7FD; margin-bottom: 5px; margin-left: 1vw; font-size: 18px; margin-top: 1vh; font-family: 'Volkhov', serif;" >Preset Sizes</label>
+                <select class="dropdown" id="presetSize" onchange="changeIframeSize()">
+                    <option value="320x568">iPhone 5/SE</option>
+                    <option value="375x667">iPhone 6/7/8</option>
+                    <option value="414x736">iPhone 6/7/8 Plus</option>
+                    <option value="375x812">iPhone X/XS/11 Pro</option>
+                    <option value="414x896">iPhone XR/11/11 Pro Max</option>
+                </select>
+            </div>
+
+            <!-- Additional customization elements (initially hidden) -->
+            <div class="childtwo" id="childTwo" style="display: none;">
+                <h1 style="align-self: center;">Customisation</h1>
+                <div class="line" style="align-self: center;"></div>
+                <div class="custom">
+               
+                <label for="input" style="color:#26F7FD; font-family: 'Volkhov', serif;margin-bottom: 5px; margin-left: 1vw; font-size: 18px; margin-top: 1vh; position: relative; left: 0px; ">Package Name</label>
+                <span class="input">
+                    <input type="text" class="inputX" id="packageName" name="packageName" placeholder="com.example.myapp" required>
+                    <span></span>
+                </span>
+                <label for="input" style="color:#26F7FD; font-family: 'Volkhov', serif;margin-bottom: 5px; margin-left: 1vw; font-size: 18px; margin-top: 1vh">Version ID</label>
+                <span class="input">
+                    <input type="text" class="inputX" id="versionName" name="versionName" placeholder="1.0.0" required>
+                    <span></span>
+                </span>
+                <label for="input" style="color:#26F7FD; font-family: 'Volkhov', serif;margin-bottom: 5px; margin-left: 1vw; font-size: 18px; margin-top: 1vh">Meta Number</label>
+                <span class="input">
+                    <input type="text" class="inputX" id="versionCode" name="versionCode" placeholder="1" required>
+                    <span></span>
+                </span>
+                
+            </div>
+                <!-- <label for="packageName">Package Name:</label>
+                <input type="text" id="packageName" name="packageName" placeholder="com.example.myapp">
+
+                <label for="versionName">Version Name:</label>
+                <input type="text" id="versionName" name="versionName" placeholder="1.0.0">
+
+                <label for="versionCode">Version Code:</label>
+                <input type="text" id="versionCode" name="versionCode" placeholder="1"> -->
+
+                <!-- App icon upload (replace this with your implementation) -->
+                <!-- <label for="appIcon">App Icon:</label>
+                <input type="file" id="appIcon" name="appIcon"> -->
+                <div class="upload-files-container" id="upload_container">
+                    <div class="drag-file-area">
+                        <span class="material-icons-outlined upload-icon"> file_upload </span>
+                        <h3 class="dynamic-message"> Drag & drop your logo file here </h3>
+                        <label class="label"> or <span class="browse-files"> <input id="appIcon" name="appIcon" type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span> </label>
+                    </div>
+                    <span class="cannot-upload-message"> <span class="material-icons-outlined">error</span> Please select a file first <span class="material-icons-outlined cancel-alert-button">cancel</span> </span>
+                    <div class="file-block">
+                        <div class="file-info"> <span class="material-icons-outlined file-icon">description</span> <span class="file-name"> </span> | <span class="file-size">  </span> </div>
+                        <span class="material-icons remove-file-icon">delete</span>
+                        <div class="progress-bar"> </div>
+                    </div>
+                    <button type="button" class="upload-button" style=" transform: translateZ(50px);"> Upload </button>
+                </div>
+            
+
+                <!-- Save button for customization options -->
+                <!-- <button class="saveCustomization" onclick="saveCustomization()">Save Customization</button> -->
+            </div>
+        </div>
+
+        <!-- Right child flexbox with generate app options -->
+        <div class="rightChild" id="rightChild">
+
+            <h1>Generate Application</h1>
+            <div class="line"></div>
+
+            <form id="appGenerationForm">
+                <label for="input" style="color:#26F7FD; font-family: 'Volkhov', serif;margin-bottom: 5px; margin-left: 1vw; font-size: 18px; margin-top: 1vh">Application Name</label>
+                <span class="input">
+                    <input type="text" class="inputX" id="appName" name="appName" placeholder="HelloWorld" required>
+                    <span></span>
+                </span>
+
+                <div class="platform">
+                    <div class="slider1">
+                        <i class="fa-brands fa-android fa-2xl" style="color: #26f7fd; padding: 10px;"></i>
+                        <div class="toggle">
+                            <input class="Slider" type="checkbox" id="androidPlatform">
+                            <label for="androidPlatform">
+                                <span class="thumb"></span>
+                            </label>
+                            <div class="light"></div>
+                        </div>
+                    </div>
+                    <div class="slider1">
+                        <i class="fa-brands fa-apple fa-2xl" style="color: #26f7fd; padding: 10px;"></i>
+                        <div class="toggle">
+                            <input class="Slider" type="checkbox" id="iosPlatform">
+                            <label for="iosPlatform">
+                                <span class="thumb"></span>
+                            </label>
+                            <div class="light"></div>
+                        </div>
+                    </div>
+                </div>
+               
+                <button class="ctn" type="button" onclick="generateApp()" style=" transform: translateZ(50px);">Generate App</button>
+            </form>
+            <button class="customizationButton" onclick="toggleCustomization()">More Customization</button>
+            <div id="downloadLink" style="display: none;">
+                <p>App generated successfully! Click below to download:</p>
+                <a id="appDownloadLink" href="#" download="MyApp.apk">Download App</a>
+            </div>
+        </div>
+    </div>
+
+    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="./app-generation.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js'></script>
+    <script>
+        function changeIframeSize() {
+            const presetSize = document.getElementById('presetSize').value.split('x');
+            const width = presetSize[0];
+            const height = presetSize[1];
+
+            const previewIframe = document.getElementById('previewIframe');
+            if (previewIframe) {
+                previewIframe.style.width = width + 'px';
+                previewIframe.style.height = height + 'px';
+            }
+        }
+
+        function setIframeSrc(link) {
+            const linkPreview = document.getElementById('linkPreview');
+            const previewIframe = document.getElementById('previewIframe');
+
+            if (linkPreview) {
+                linkPreview.src = link;
+            }
+
+            if (previewIframe) {
+                previewIframe.src = link;
+            }
+        }
+
+        // Get the link from the previous page (you need to pass it somehow)
+        const userLink = sessionStorage.getItem('websiteLink');
+        setIframeSrc(userLink);
+        changeIframeSize();
+        window.onload = function () {
+            window.scrollTo(0, 0);
+        };
+        VanillaTilt.init(document.querySelectorAll(".rightChild"), {
+            max: 5,
+            speed: 400,
+            glare: true,
+            "max-glare": .5,
+         
+        });
+        VanillaTilt.init(document.querySelectorAll(".upload-files-container"), {
+            max: 15,
+            speed: 600,
+            glare: true,
+            "max-glare": .5,
+         
+        });
+
+        function toggleCustomization() {
+        const childOne = document.getElementById('childOne');
+        const childTwo = document.getElementById('childTwo');
+        const leftChild = document.getElementById('leftChild');
+
+        // Toggle the display of childOne and childTwo
+        childOne.style.display = childOne.style.display === 'none' ? 'flex' : 'none';
+        childTwo.style.display = childTwo.style.display === 'none' ? 'flex' : 'none';
+
+        // Rotate the left child 180 degrees
+        leftChild.style.transform = leftChild.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+        leftChild.style.transition = 'transform 0.5s'; // Add transition for smooth animation
+
+        // Adjust childTwo styling (you might need to fine-tune this)
+        childTwo.style.transform = childTwo.style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+        childTwo.style.transition = 'transform 0.5s'; // Add transition for smooth animation
+    }
+
+    function saveCustomization() {
+        // Implement saving of customization data (package name, version name, version code, app icon)
+        alert('Customization data saved!');
+    }
+    var isAdvancedUpload = function() {
+  var div = document.createElement('div');
+  return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+}();
+
+let draggableFileArea = document.querySelector(".drag-file-area");
+let browseFileText = document.querySelector(".browse-files");
+let uploadIcon = document.querySelector(".upload-icon");
+let dragDropText = document.querySelector(".dynamic-message");
+let fileInput = document.querySelector(".default-file-input");
+let cannotUploadMessage = document.querySelector(".cannot-upload-message");
+let cancelAlertButton = document.querySelector(".cancel-alert-button");
+let uploadedFile = document.querySelector(".file-block");
+let fileName = document.querySelector(".file-name");
+let fileSize = document.querySelector(".file-size");
+let progressBar = document.querySelector(".progress-bar");
+let removeFileButton = document.querySelector(".remove-file-icon");
+let uploadButton = document.querySelector(".upload-button");
+let fileFlag = 0;
+
+fileInput.addEventListener("click", () => {
+	fileInput.value = '';
+	console.log(fileInput.value);
+});
+
+fileInput.addEventListener("change", e => {
+	console.log(" > " + fileInput.value)
+	uploadIcon.innerHTML = 'check_circle';
+	dragDropText.innerHTML = 'File Dropped Successfully!';
+	document.querySelector(".label").innerHTML = `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: 0;"> browse file</span></span>`;
+	uploadButton.innerHTML = `Upload`;
+	fileName.innerHTML = fileInput.files[0].name;
+	fileSize.innerHTML = (fileInput.files[0].size/1024).toFixed(1) + " KB";
+	uploadedFile.style.cssText = "display: flex;";
+	progressBar.style.width = 0;
+	fileFlag = 0;
+});
+
+uploadButton.addEventListener("click", () => {
+	let isFileUploaded = fileInput.value;
+	if(isFileUploaded != '') {
+		if (fileFlag == 0) {
+    		fileFlag = 1;
+    		var width = 0;
+    		var id = setInterval(frame, 50);
+    		function frame() {
+      			if (width >= 390) {
+        			clearInterval(id);
+					uploadButton.innerHTML = `<span class="material-icons-outlined upload-button-icon"> check_circle </span> Uploaded`;
+      			} else {
+        			width += 5;
+        			progressBar.style.width = width + "px";
+      			}
+    		}
+  		}
+	} else {
+		cannotUploadMessage.style.cssText = "display: flex; animation: fadeIn linear 1.5s;";
+	}
+});
+
+cancelAlertButton.addEventListener("click", () => {
+	cannotUploadMessage.style.cssText = "display: none;";
+});
+
+if(isAdvancedUpload) {
+	["drag", "dragstart", "dragend", "dragover", "dragenter", "dragleave", "drop"].forEach( evt => 
+		draggableFileArea.addEventListener(evt, e => {
+			e.preventDefault();
+			e.stopPropagation();
+		})
+	);
+
+	["dragover", "dragenter"].forEach( evt => {
+		draggableFileArea.addEventListener(evt, e => {
+			e.preventDefault();
+			e.stopPropagation();
+			uploadIcon.innerHTML = 'file_download';
+			dragDropText.innerHTML = 'Drop your file here!';
+		});
+	});
+
+	draggableFileArea.addEventListener("drop", e => {
+		uploadIcon.innerHTML = 'check_circle';
+		dragDropText.innerHTML = 'File Dropped Successfully!';
+		document.querySelector(".label").innerHTML = `drag & drop or <span class="browse-files"> <input type="file" class="default-file-input" style=""/> <span class="browse-files-text" style="top: -23px; left: -20px;"> browse file</span> </span>`;
+		uploadButton.innerHTML = `Upload`;
+		
+		let files = e.dataTransfer.files;
+		fileInput.files = files;
+		console.log(files[0].name + " " + files[0].size);
+		console.log(document.querySelector(".default-file-input").value);
+		fileName.innerHTML = files[0].name;
+		fileSize.innerHTML = (files[0].size/1024).toFixed(1) + " KB";
+		uploadedFile.style.cssText = "display: flex;";
+		progressBar.style.width = 0;
+		fileFlag = 0;
+	});
+}
+
+removeFileButton.addEventListener("click", () => {
+	uploadedFile.style.cssText = "display: none;";
+	fileInput.value = '';
+	uploadIcon.innerHTML = 'file_upload';
+	dragDropText.innerHTML = 'Drag & drop any file here';
+	document.querySelector(".label").innerHTML = `or <span class="browse-files"> <input type="file" class="default-file-input"/> <span class="browse-files-text">browse file</span> <span>from device</span> </span>`;
+	uploadButton.innerHTML = `Upload`;
+});
+    </script>
+</body>
+
+</html>
